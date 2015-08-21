@@ -1,15 +1,14 @@
 package reflection;
 
-import junit.framework.Assert;
 import org.junit.Test;
 
-import javax.swing.*;
+import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
-import static junit.framework.Assert.*;
+import static junit.framework.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
 //@RunWith(SpringJUnit4ClassRunner.class)
 //@SpringApplicationConfiguration(classes = JavaReflectionApplication.class)
@@ -81,6 +80,13 @@ public class JavaReflectionApplicationTests {
 
         classes = Character.class.getDeclaredClasses();
         assertAndPrintClassName(classes);
+
+        Field f = System.class.getField("out");
+        Class c = f.getDeclaringClass();
+        assertAndPrintClassName(c);
+
+        assertAndPrintClassName(MyClass.o.getClass().getEnclosingClass());
+
     }
 
     private void assertAndPrintClassName(Class<?>[] classes) {
@@ -95,3 +101,9 @@ public class JavaReflectionApplicationTests {
 
 }
 
+class MyClass {
+    static Object o = new Object() {
+        public void m() {}
+    };
+    static Class c = o.getClass().getEnclosingClass();
+}
