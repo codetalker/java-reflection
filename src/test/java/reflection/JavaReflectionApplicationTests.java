@@ -8,7 +8,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 import static junit.framework.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
 
 //@RunWith(SpringJUnit4ClassRunner.class)
 //@SpringApplicationConfiguration(classes = JavaReflectionApplication.class)
@@ -89,6 +88,13 @@ public class JavaReflectionApplicationTests {
 
     }
 
+    @Test
+    public void testSpyClass() throws Exception {
+        ClassDeclarationSpy.spy("reflection.JavaReflectionApplication");
+        ClassDeclarationSpy.spy("java.util.concurrent.ConcurrentNavigableMap");
+        ClassDeclarationSpy.spy("java.io.InterruptedIOException");
+    }
+
     private void assertAndPrintClassName(Class<?>[] classes) {
         assertNotNull(classes);
         Arrays.asList(classes).forEach(c -> System.out.println(c));
@@ -98,6 +104,7 @@ public class JavaReflectionApplicationTests {
         assertNotNull(c);
         System.out.println(c.getName());
     }
+
 
 }
 
