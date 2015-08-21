@@ -78,6 +78,9 @@ public class JavaReflectionApplicationTests {
 
         Class<?>[] classes = Character.class.getClasses();
         assertAndPrintClassName(classes);
+
+        classes = Character.class.getDeclaredClasses();
+        assertAndPrintClassName(classes);
     }
 
     private void assertAndPrintClassName(Class<?>[] classes) {
